@@ -1,21 +1,21 @@
 from turtle import title
 import pygame, sys, random, time
 
-class Spaceship(pygame.sprite.Sprite):
+class Spaceship(pygame.sprite.Sprite):          #Spaceship sprite
     def __init__(self,path,x_pos,y_pos):
         super().__init__()
-        self.uncharged = pygame.image.load(path)
-        self.charged = pygame.image.load('Assets\Meteor Dodger Assets\spaceship_charged.png')
+        self.uncharged = pygame.image.load(path)        #take uncharged image of the spaceship
+        self.charged = pygame.image.load('Assets\Meteor Dodger Assets\spaceship_charged.png')   #store charged image of the spaceship
         
-        self.image = self.uncharged
-        self.rect = self.image.get_rect(center = (x_pos,y_pos))
-        self.shield_surface = pygame.image.load('Assets\Meteor Dodger Assets\shield.png')
-        self.health = 5
-        self.health_limit = 5
-        self.damage = 1
-        self.healed = 1
+        self.image = self.uncharged #image state
+        self.rect = self.image.get_rect(center = (x_pos,y_pos))     #spaceship position
+        self.shield_surface = pygame.image.load('Assets\Meteor Dodger Assets\shield.png')   #shield/health image
+        self.health = 5 #health count
+        self.health_limit = 5   #health limit
+        self.damage = 1 #damage amount
+        self.healed = 1 #heal amount
         
-    def screen_constrain(self):
+    def screen_constrain(self):         #keep the spaceship inside the window
         if self.rect.right >= 1280:
             self.rect.right = 1280
         if self.rect.left <= 0:
@@ -25,9 +25,9 @@ class Spaceship(pygame.sprite.Sprite):
         if self.rect.bottom >= 720:
             self.rect.bottom = 720
 
-    def display_health(self):
-        for index,shield in enumerate(range(self.health)):
-            screen.blit(self.shield_surface,(10 + index * 40,10))
+    def display_health(self):           #display health
+        for index,shield in enumerate(range(self.health)):  #iterate health based on self.health
+            screen.blit(self.shield_surface,(10 + index * 40,10))   #draw shield/health on the position given
 
     def get_hit(self,damage):
         self.health -= self.damage
